@@ -1,0 +1,151 @@
+---
+const aboutData = {
+  description:
+    "SW Tucumán Aventura es una empresa de turismo activo, prestadora de servicios en la naturaleza, comprometida con el uso saludable y sustentable del ambiente. La misión de SW Tucumán Aventura es brindar servicios de turismo activo; de índole educativo, deportivo, recreacional y empresarial; acompañado de una gran responsabilidad social en relación al uso de nuestro ambiente.",
+  secondaryText:
+    "Para ello utilizamos los recursos de la naturaleza, en armonía con actividades de aventura, en los alrededores del Dique Celestino Gelsi; el cual se encuentra ubicado en la comuna El Cadillal, en la Provincia de Tucumán.",
+};
+---
+
+<div class="bg-gray-200 relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 py-10 relative z-10" id="about">
+    <div
+      class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center justify-center"
+    >
+      <!-- Columna izquierda - Título cuadrado y sección del instructor -->
+      <div class="order-2 lg:order-1 lg:pl-12 space-y-8 relative z-0">
+        <div
+          class="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-8 space-y-6"
+        >
+          <h2 class="text-[#005F73] text-2xl font-bold">
+            S.W. Tucuman Aventuras
+          </h2>
+          <p class="text-gray-700 text-lg leading-relaxed">
+            {aboutData.description}
+          </p>
+          <p class="text-gray-700 text-lg leading-relaxed">
+            {aboutData.secondaryText}
+          </p>
+          <div class="pt-4">
+            <button
+              class="inline-flex items-center px-6 py-3 bg-primary text-white rounded-lg hover:scale-105 hover:bg-primary/90 transition-all duration-300"
+              id="contactButtonCard"
+            >
+              Contactarnos
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Columna derecha - Texto original -->
+      <div class="order-1 lg:order-2 relative z-10 flex flex-col items-center space-y-8">
+        <div
+          class="slide-in relative w-full h-[200px] lg:w-[500px] lg:h-[250px] mx-auto"
+        >
+          <div class="absolute inset-0">
+            <div
+              class="w-full h-full bg-primary flex items-center justify-center transform transition-transform hover:scale-105 duration-300 px-10 rounded-lg"
+            >
+              <div class="text-center text-white">
+                <span
+                  class="translate-effect block text-4xl font-bold tracking-wide"
+                >
+                  QUIENES
+                </span>
+                <span
+                  class="translate-effect block text-5xl font-bold tracking-wide mt-2"
+                >
+                  SOMOS
+                </span>
+              </div>
+            </div>
+            <div class="absolute inset-[-10px] border-4 border-primary/20">
+            </div>
+          </div>
+        </div>
+
+        <!-- Nueva sección - Conocer al Instructor -->
+        <div
+          class="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-6 space-y-4 w-full h-[300px] lg:w-[500px] lg:h-[250px] mx-auto flex flex-col justify-center"
+        >
+          <h2 class="text-[#005F73] text-xl font-bold">
+            Conoce a Nuestro Director
+          </h2>
+          <div class="flex items-center space-x-4">
+            <img
+              src="/images/sergio-wilde.jpg"
+              alt="Sergio Wilde"
+              class="w-24 h-24 rounded-full shadow-lg"
+            />
+            <p class="text-gray-700 text-base leading-relaxed">
+              Sergio Wilde, nuestro experimentado instructor, está aquí para
+              guiarte en cada aventura.
+            </p>
+          </div>
+          <div class="pt-4">
+            <button
+              class="inline-flex items-center px-6 py-3 bg-primary text-white rounded-lg hover:scale-105 hover:bg-primary/90 transition-all duration-300"
+              onclick="window.location.href='/sergio-wilde/'"
+            >
+              <span class="mr-2">📄</span>
+              Ver CV
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  .slide-in {
+    overflow: visible;
+  }
+
+  .translate-effect {
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: all 0.8s ease-out;
+  }
+
+  .translate-effect.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  @keyframes spin-slow {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .animate-spin-slow {
+    animation: spin-slow 20s linear infinite;
+  }
+</style>
+
+<script>
+  import { openSidebar } from "@/utils/helpers";
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.1,
+    },
+  );
+
+  document.querySelectorAll(".translate-effect").forEach((el) => {
+    observer.observe(el);
+  });
+  const contactButtonCard = document.getElementById("contactButtonCard");
+  contactButtonCard?.addEventListener("click", openSidebar);
+</script>

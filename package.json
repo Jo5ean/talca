@@ -1,14 +1,20 @@
 {
-  "name": "web",
-  "type": "module",
-  "version": "0.0.1",
-  "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
-  "dependencies": {
-    "astro": "^5.3.1"
-  }
+    "name": "tucuman-aventuras",
+    "type": "module",
+    "version": "1.0.0",
+    "scripts": {
+        "start": "astro dev --port $PORT --host",
+        "dev": "astro dev",
+        "build": "astro build"
+    },
+    "dependencies": {
+        "@astrojs/node": "^9.1.0",
+        "@astrojs/tailwind": "^6.0.0",
+        "astro": "^5.3.0",
+        "axios": "^1.7.9",
+        "flatpickr": "^4.6.13",
+        "notyf": "^3.10.0",
+        "tailwindcss": "^3.4.16",
+        "typescript": "^5.7.3"
+    }
 }

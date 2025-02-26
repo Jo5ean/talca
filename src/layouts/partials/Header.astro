@@ -1,0 +1,425 @@
+---
+import { formatName } from "@/utils/helpers";
+import ContactSidebar from "@/pages/sections/ContactSidebar.astro";
+
+interface Props {
+    isFixed?: boolean;
+    messageContact?: string | null;
+}
+
+const { isFixed = true, messageContact = null } = Astro.props;
+---
+
+<header
+    class={`bg-black/50 backdrop-blur text-white ${isFixed ? "fixed" : "static"} w-full z-40`}
+>
+    <div
+        class="container mx-auto py-4 flex justify-between items-center px-4 md:px-24 lg:px-24 xl:px-4"
+    >
+        <div class="flex items-center space-x-4">
+            <a href="/" class="cursor-pointer">
+                <img
+                    src="/logos/imagotipo-blend.PNG"
+                    alt="SW Tucumán Aventuras Logo"
+                    class="h-20 lg:h-24"
+                />
+            </a>
+        </div>
+
+        <nav class="hidden xl:block">
+            <ul class="flex flex-row items-center text-xl font-light">
+                <li>
+                    <a
+                        href="/"
+                        class="nav-link hover:text-primary transition-all duration-300 relative group px-6"
+                    >
+                        Home
+                        <div
+                            class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"
+                        >
+                        </div>
+                    </a>
+                </li>
+                <li class="text-white/50">|</li>
+                <li class="relative nav-item">
+                    <a
+                        href="#"
+                        class="nav-link hover:text-primary transition-all duration-300 relative group px-6"
+                    >
+                        Aventuras
+                        <div
+                            class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"
+                        >
+                        </div>
+                    </a>
+                    <ul
+                        class="dropdown-menu absolute bg-tertiary text-white w-64 rounded-lg shadow-lg mt-2 mx-auto px-2 py-4 z-50 space-y-3"
+                    >
+                       
+                    </ul>
+                </li>
+                <li class="text-white/50">|</li>
+               
+                <li class="relative nav-item">
+                    <button
+                        id="contactButton"
+                        aria-label="Abrir formulario de contacto"
+                        class="nav-link hover:text-primary transition-all duration-300 relative group px-6"
+                    >
+                        Contacto
+                        <div
+                            class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"
+                        >
+                        </div>
+                    </button>
+                    <ul
+                        class="dropdown-menu absolute bg-tertiary text-white w-64 rounded-lg shadow-lg mt-2 mx-auto px-2 py-4 z-50 space-y-3"
+                    >
+                        <li class="relative">
+                            <button
+                                id="contactButtonPrev"
+                                aria-label="Abrir formulario de contacto"
+                                class="nav-link hover:text-primary transition-all duration-300 relative group px-4 py-2 block whitespace-normal"
+                            >
+                            Contacto
+                        </button>
+                        </li>
+                        <li class="relative">     
+                            <a
+                                href="/sergio-wilde"
+                                class="nav-link hover:text-primary transition-all duration-300 relative group px-4 py-2 block whitespace-normal"
+                            >
+                                Sergio Wilde
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Botón hamburguesa para móvil -->
+        <button class="xl:hidden" id="menuButton" aria-label="Menu">
+            <svg
+                class="w-8 h-8"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+
+        <!-- Menú móvil -->
+        <div
+            id="mobileMenu"
+            class="hidden fixed inset-0 bg-black/90 xl:hidden h-screen"
+        >
+            <div
+                class="flex flex-col items-center justify-center h-full relative"
+            >
+                <button
+                    class="absolute top-8 right-8"
+                    id="closeButton"
+                    arial-label="Cerrar menú"
+                >
+                    <svg
+                        class="w-10 h-10 text-white"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+                <div class="mb-16">
+                    <img
+                        src="/logos/logotipo-color.PNG"
+                        alt="SW Tucumán Aventuras Logo"
+                        class="h-24 mb-4"
+                    />
+                </div>
+                <ul
+                    class="flex flex-col items-center space-y-8 text-2xl font-light"
+                >
+                    <li class="menu-item group">
+                        <a
+                            href="/"
+                            class="nav-link hover:text-primary transition-all duration-300 relative group"
+                        >
+                            Home
+                            <div
+                                class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"
+                            >
+                            </div>
+                        </a>
+                    </li>
+                   
+                 
+                    <li class="menu-item">
+                        <button
+                            id="mobileContactButton"
+                            aria-label="Abrir formulario de contacto"
+                            class="nav-link hover:text-primary transition-all duration-300 relative group"
+                        >
+                            Contacto
+                            <div
+                                class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"
+                            >
+                            </div>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div
+    id="contactSidebar"
+    class="fixed inset-y-0 right-0 w-full max-w-full lg:max-w-3xl bg-white transform translate-x-full transition-transform duration-300 ease-in-out z-50 overflow-y-auto"
+>
+    <button
+        id="closeSidebar"
+        aria-label="Cerrar formulario de contacto"
+        class="absolute top-8 right-8 text-gray-800 hover:text-primary"
+    >
+        <svg
+            class="w-8 h-8"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+        >
+            <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+    </button>
+    <ContactSidebar messageContact={messageContact} />
+</div>
+
+<!-- overlay -->
+<div
+    id="sidebarOverlay"
+    class="fixed inset-0 bg-black/50 opacity-0 pointer-events-none transition-opacity duration-300 ease-in-out z-40"
+>
+</div>
+
+<style>
+    .underline-animation {
+        width: 0;
+        opacity: 0;
+        transition:
+            width 0.8s ease-out,
+            opacity 0.3s ease-out;
+    }
+
+    .nav-link:hover .underline-animation {
+        width: 100%;
+        opacity: 1;
+    }
+
+    .nav-link:hover {
+        color: #f15a24;
+    }
+
+    .underline-animation {
+        background-color: #f15a24;
+    }
+
+    .menu-enter {
+        animation: menuEnter 0.4s ease forwards;
+    }
+
+    .menu-exit {
+        animation: menuExit 0.4s ease forwards;
+    }
+
+    .menu-item {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    .menu-enter .menu-item {
+        animation: menuItemEnter 0.4s ease forwards;
+    }
+
+    @keyframes menuEnter {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes menuExit {
+        from {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        to {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+    }
+
+    @keyframes menuItemEnter {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .dropdown-menu {
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        transform: translateY(-10px);
+    }
+
+    .nav-item:hover .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    /* Estilos para la barra de desplazamiento */
+    #contactSidebar::-webkit-scrollbar {
+        width: 3px;
+    }
+
+    #contactSidebar::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    #contactSidebar::-webkit-scrollbar-thumb {
+        background: #e26128;
+        border-radius: 3px;
+    }
+
+    #contactSidebar::-webkit-scrollbar-thumb:hover {
+        background: #c04d1f;
+    }
+</style>
+
+<script>
+import { openSidebar } from "@/utils/helpers";
+
+    const menuButton = document.getElementById(
+        "menuButton",
+    ) as HTMLButtonElement;
+    const closeButton = document.getElementById(
+        "closeButton",
+    ) as HTMLButtonElement;
+    const mobileMenu = document.getElementById("mobileMenu") as HTMLDivElement;
+    const mobileLinks = document.querySelectorAll(
+        "#mobileMenu a",
+    ) as NodeListOf<HTMLAnchorElement>;
+
+    menuButton?.addEventListener("click", () => {
+        mobileMenu?.classList.remove("hidden");
+        mobileMenu?.classList.add("menu-enter");
+        document.body.style.overflow = "hidden";
+
+        const menuItems = document.querySelectorAll(
+            ".menu-item",
+        ) as NodeListOf<HTMLLIElement>;
+        menuItems.forEach((item, index) => {
+            item.style.animationDelay = `${0.1 + index * 0.1}s`;
+        });
+    });
+
+    const closeMenu = () => {
+        mobileMenu?.classList.add("menu-exit");
+        setTimeout(() => {
+            mobileMenu?.classList.add("hidden");
+            mobileMenu?.classList.remove("menu-enter", "menu-exit");
+        }, 300);
+        document.body.style.overflow = "";
+    };
+
+    closeButton?.addEventListener("click", closeMenu);
+    mobileLinks.forEach((link) => {
+        link.addEventListener("click", closeMenu);
+    });
+
+    //test de logica de scroll smooth
+    const anchors = document.querySelectorAll(
+        'a[href^="#"], a[href="/"]',
+    ) as NodeListOf<HTMLAnchorElement>;
+
+    anchors.forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+            const href = this.getAttribute("href");
+
+            if (href?.startsWith("#")) {
+                e.preventDefault();
+                const targetElement = document.querySelector(href);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start",
+                        inline: "nearest",
+                    });
+                }
+            } else if (href === "/" && window.location.pathname === "/") {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth",
+                });
+            }
+        });
+    });
+
+    const navItems = document.querySelectorAll(
+        ".nav-item",
+    ) as NodeListOf<HTMLElement>;
+    navItems.forEach((item: HTMLElement) => {
+        const submenu = item.querySelector("ul");
+        if (submenu) {
+            item.addEventListener("click", (e: Event) => {
+                e.stopPropagation();
+                submenu.classList.toggle("hidden");
+            });
+            item.addEventListener("mouseenter", () => {
+                submenu.classList.remove("hidden");
+            });
+        }
+    });
+
+    const contactButton = document.getElementById("contactButton");
+    const contactButtonPrev = document.getElementById("contactButtonPrev");
+    const mobileContactButton = document.getElementById("mobileContactButton");
+    const contactSidebar = document.getElementById("contactSidebar");
+    const sidebarOverlay = document.getElementById("sidebarOverlay");
+
+    const closeSidebarHandler = () => {
+        contactSidebar?.classList.add("translate-x-full");
+        sidebarOverlay?.classList.add("opacity-0", "pointer-events-none");
+        document.body.style.overflow = "";
+    };
+    contactSidebar
+sidebarOverlay
+mobileMenu
+mobileMenu
+    contactButton?.addEventListener("click", openSidebar);
+    contactButtonPrev?.addEventListener("click", openSidebar);
+    mobileContactButton?.addEventListener("click", openSidebar);
+    document
+        .getElementById("closeSidebarBtn")
+        ?.addEventListener("click", closeSidebarHandler);
+    sidebarOverlay?.addEventListener("click", closeSidebarHandler);
+</script>

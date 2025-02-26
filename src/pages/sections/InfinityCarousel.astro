@@ -1,0 +1,49 @@
+<div class="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
+  
+  <!-- Primera lista de logos (visible) -->
+  <ul class="flex items-center justify-center md:justify-start infinite-scroll">
+    <li class="mx-6"><img src="/brands/bosch.png" class="w-48 h-48 object-contain" alt="Logo BOSCH" loading="lazy"></li>
+    <li class="mx-6"><img src="/brands/donal.png" class="w-48 h-48 object-contain" alt="Logo DONAL" loading="lazy"></li>
+    <li class="mx-6"><img src="/brands/donald.png" class="w-48 h-48 object-contain" alt="Logo DONALD" loading="lazy"></li>
+    <li class="mx-6"><img src="/brands/famel.png" class="w-48 h-48 object-contain" alt="Logo FAMEL" loading="lazy"></li>
+    <li class="mx-6"><img src="/brands/fleet.png" class="w-48 h-48 object-contain" alt="Logo FLEET" loading="lazy"></li>
+    <li class="mx-6"><img src="/brands/mahle.png" class="w-48 h-48 object-contain" alt="Logo MAHLE" loading="lazy"></li>
+    <li class="mx-6"><img src="/brands/mann.png" class="w-48 h-48 object-contain" alt="Logo MANN" loading="lazy"></li>
+    <li class="mx-6"><img src="/brands/o4.png" class="w-48 h-48 object-contain" alt="Logo O4" loading="lazy"></li>
+    <li class="mx-6"><img src="/brands/rama.png" class="w-48 h-48 object-contain" alt="Logo RAMA" loading="lazy"></li>
+  </ul>
+  
+  <!-- Segunda lista de logos (para efecto de desplazamiento continuo) -->
+  <ul class="flex items-center justify-center md:justify-start infinite-scroll" aria-hidden="true">
+    <li class="mx-6"><img src="/brands/bosch.png" class="w-48 h-48 object-contain" alt="Logo BOSCH" loading="lazy"></li>
+    <li class="mx-6"><img src="/brands/donal.png" class="w-48 h-48 object-contain" alt="Logo DONAL" loading="lazy"></li>
+    <li class="mx-6"><img src="/brands/donald.png" class="w-48 h-48 object-contain" alt="Logo DONALD" loading="lazy"></li>
+    <li class="mx-6"><img src="/brands/famel.png" class="w-48 h-48 object-contain" alt="Logo FAMEL" loading="lazy"></li>
+    <li class="mx-6"><img src="/brands/fleet.png" class="w-48 h-48 object-contain" alt="Logo FLEET" loading="lazy"></li>
+    <li class="mx-6"><img src="/brands/mahle.png" class="w-48 h-48 object-contain" alt="Logo MAHLE" loading="lazy"></li>
+    <li class="mx-6"><img src="/brands/mann.png" class="w-48 h-48 object-contain" alt="Logo MANN" loading="lazy"></li>
+    <li class="mx-6"><img src="/brands/o4.png" class="w-48 h-48 object-contain" alt="Logo O4" loading="lazy"></li>
+    <li class="mx-6"><img src="/brands/rama.png" class="w-48 h-48 object-contain" alt="Logo RAMA" loading="lazy"></li>
+  </ul>
+
+</div>
+
+<style>
+  @keyframes infinite-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+
+  .infinite-scroll {
+    animation: infinite-scroll 20s linear infinite;
+  }
+
+  .infinite-scroll img {
+    height: 150px;
+    margin: 0 100px;
+  }
+</style>
