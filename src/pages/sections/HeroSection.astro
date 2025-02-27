@@ -2,171 +2,24 @@
 import config from "@/config/config";
 ---
 
-<h1 class="hidden">{config.title}</h1>
-<div
-  class="relative h-screen w-full overflow-hidden"
-  id="hero-carousel"
-  aria-live="polite"
+<section 
+  class="relative w-full h-screen overflow-hidden mt-[-70px]" 
+  aria-label="Talca Gaseosas"
 >
-  <!-- Contenedor para los botones en mobile -->
-  <div class="absolute bottom-5 left-6 flex sm:hidden">
-    <!-- Previous Slide Button -->
-    <button
-      id="prev-slide"
-      aria-label="Anterior slide"
-      class="text-white hover:text-gray-300 transition-all duration-400 flex items-center justify-center p-4 border-[1px] border-white hover:bg-white hover:bg-opacity-10 backdrop-blur-lg rounded-l-full"
-      tabindex="0"
-    >
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M15 19L8 12L15 5"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"></path>
-      </svg>
-      <span class="sr-only">Previous</span>
-    </button>
-
-    <!-- Separador vertical -->
-    <div class="w-[1px] bg-white"></div>
-
-    <!-- Next Slide Button -->
-    <button
-      id="next-slide"
-      aria-label="Siguiente slide"
-      class="text-white hover:text-gray-300 transition-all duration-400 flex items-center justify-center p-4 border-[1px] border-white hover:bg-white hover:bg-opacity-10 backdrop-blur-lg rounded-r-full"
-      tabindex="0"
-    >
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M9 5L16 12L9 19"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"></path>
-      </svg>
-      <span class="sr-only">Next</span>
-    </button>
+  <h1 class="sr-only">Talca - Gaseosas</h1>
+  
+  <div class="absolute inset-0 w-full h-full">
+    <img 
+      src="/images/banner-principal.webp" 
+      alt="Gaseosa Talca - Refrescante y deliciosa"
+      class="w-full h-full object-cover"
+      style="object-position: center 100%;"
+      width="1920"
+      height="1080"
+      loading="eager"
+      fetchpriority="high"
+    />
   </div>
+</section>
 
-  <!-- Botones para versión desktop -->
-  <button
-    id="prev-slide-desktop"
-    aria-label="Anterior slide"
-    class="hidden sm:flex absolute text-white hover:text-gray-300 transition-all duration-400 items-center justify-center p-4 border-[1px] border-white hover:bg-white hover:bg-opacity-10 backdrop-blur-lg rounded-full top-1/2 -translate-y-1/2 left-5"
-    tabindex="0"
-  >
-    <svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M15 19L8 12L15 5"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"></path>
-    </svg>
-    <span class="sr-only">Previous</span>
-  </button>
 
-  <button
-    id="next-slide-desktop"
-    aria-label="Siguiente slide"
-    class="hidden sm:flex absolute text-white hover:text-gray-300 transition-all duration-400 items-center justify-center p-4 border-[1px] border-white hover:bg-white hover:bg-opacity-10 backdrop-blur-lg rounded-full top-1/2 -translate-y-1/2 right-5"
-    tabindex="0"
-  >
-    <svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M9 5L16 12L9 19"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"></path>
-    </svg>
-    <span class="sr-only">Next</span>
-  </button>
-</div>
-
-<style is:global>
-  [data-carousel-item] {
-    will-change: opacity;
-  }
-</style>
-
-<script is:inline>
-  const carousel = document.getElementById("hero-carousel");
-  const slides = carousel.querySelectorAll("[data-carousel-item]");
-  const prevButton = document.getElementById("prev-slide");
-  const nextButton = document.getElementById("next-slide");
-  const prevButtonDesktop = document.getElementById("prev-slide-desktop");
-  const nextButtonDesktop = document.getElementById("next-slide-desktop");
-  let currentSlide = 0;
-  let slideInterval;
-
-  function showSlide(index) {
-    slides.forEach((slide, i) => {
-      slide.classList.toggle("opacity-100", i === index);
-      slide.classList.toggle("opacity-0", i !== index);
-    });
-  }
-
-  function nextSlide() {
-    currentSlide = (currentSlide + 1) % slides.length;
-    showSlide(currentSlide);
-  }
-
-  function prevSlide() {
-    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-    showSlide(currentSlide);
-  }
-
-  function resetInterval() {
-    clearInterval(slideInterval);
-    slideInterval = setInterval(nextSlide, 5000);
-  }
-
-  slideInterval = setInterval(nextSlide, 5000);
-
-  prevButton.addEventListener("click", () => {
-    prevSlide();
-    resetInterval();
-  });
-
-  nextButton.addEventListener("click", () => {
-    nextSlide();
-    resetInterval();
-  });
-
-  prevButtonDesktop.addEventListener("click", () => {
-    prevSlide();
-    resetInterval();
-  });
-
-  nextButtonDesktop.addEventListener("click", () => {
-    nextSlide();
-    resetInterval();
-  });
-</script>

@@ -1,4 +1,4 @@
-import type { Social } from "@/types/social";
+import type { Social } from "../types/social";
 import Facebook from "@/components/icons/Facebook.astro";
 import Instagram from "@/components/icons/Instagram.astro";
 import Whatsapp from "@/components/icons/Whatsapp.astro";

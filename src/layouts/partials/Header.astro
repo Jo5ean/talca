@@ -1,6 +1,6 @@
 ---
-import { formatName } from "@/utils/helpers";
 import ContactSidebar from "@/pages/sections/ContactSidebar.astro";
+import config from "@/config/config";
 
 interface Props {
     isFixed?: boolean;
@@ -11,96 +11,94 @@ const { isFixed = true, messageContact = null } = Astro.props;
 ---
 
 <header
-    class={`bg-black/50 backdrop-blur text-white ${isFixed ? "fixed" : "static"} w-full z-40`}
+    class="absolute top-0 w-full z-50 soda-header"
 >
+    <!-- Efecto de burbujas/espuma -->
+    <div class="bubbles-container">
+        <div class="bubble bubble-1"></div>
+        <div class="bubble bubble-2"></div>
+        <div class="bubble bubble-3"></div>
+        <div class="bubble bubble-4"></div>
+        <div class="bubble bubble-5"></div>
+        <div class="bubble bubble-6"></div>
+        <div class="bubble bubble-7"></div>
+        <div class="bubble bubble-8"></div>
+    </div>
+    
     <div
-        class="container mx-auto py-4 flex justify-between items-center px-4 md:px-24 lg:px-24 xl:px-4"
+        class="container mx-auto py-4 flex justify-between items-center px-4 md:px-24 lg:px-24 xl:px-4 relative z-10"
     >
         <div class="flex items-center space-x-4">
             <a href="/" class="cursor-pointer">
                 <img
-                    src="/logos/imagotipo-blend.PNG"
-                    alt="SW Tucumán Aventuras Logo"
-                    class="h-20 lg:h-24"
+                    src="/logos/logo-color-fondo.png"
+                    alt="Talca Logo"
+                    class="h-12 lg:h-14"
                 />
             </a>
         </div>
 
         <nav class="hidden xl:block">
-            <ul class="flex flex-row items-center text-xl font-light">
+            <ul class="flex flex-row items-center text-lg font-bold">
                 <li>
                     <a
                         href="/"
-                        class="nav-link hover:text-primary transition-all duration-300 relative group px-6"
+                        class="nav-link transition-all duration-300 relative group px-6"
                     >
-                        Home
+                        Inicio
                         <div
-                            class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"
+                            class="bubble-animation absolute -bottom-2 left-0 right-0"
                         >
                         </div>
                     </a>
                 </li>
                 <li class="text-white/50">|</li>
-                <li class="relative nav-item">
+                <li>
                     <a
-                        href="#"
-                        class="nav-link hover:text-primary transition-all duration-300 relative group px-6"
+                        href="#productos"
+                        class="nav-link transition-all duration-300 relative group px-6"
                     >
-                        Aventuras
+                        Productos
                         <div
-                            class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"
+                            class="bubble-animation absolute -bottom-2 left-0 right-0"
                         >
                         </div>
                     </a>
-                    <ul
-                        class="dropdown-menu absolute bg-tertiary text-white w-64 rounded-lg shadow-lg mt-2 mx-auto px-2 py-4 z-50 space-y-3"
-                    >
-                       
-                    </ul>
                 </li>
                 <li class="text-white/50">|</li>
-               
+                <li>
+                    <a
+                        href="#nosotros"
+                        class="nav-link transition-all duration-300 relative group px-6"
+                    >
+                        Nosotros
+                        <div
+                            class="bubble-animation absolute -bottom-2 left-0 right-0"
+                        >
+                        </div>
+                    </a>
+                </li>
+                <li class="text-white/50">|</li>
                 <li class="relative nav-item">
                     <button
                         id="contactButton"
                         aria-label="Abrir formulario de contacto"
-                        class="nav-link hover:text-primary transition-all duration-300 relative group px-6"
+                        class="nav-link transition-all duration-300 relative group px-6"
                     >
                         Contacto
                         <div
-                            class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"
+                            class="bubble-animation absolute -bottom-2 left-0 right-0"
                         >
                         </div>
                     </button>
-                    <ul
-                        class="dropdown-menu absolute bg-tertiary text-white w-64 rounded-lg shadow-lg mt-2 mx-auto px-2 py-4 z-50 space-y-3"
-                    >
-                        <li class="relative">
-                            <button
-                                id="contactButtonPrev"
-                                aria-label="Abrir formulario de contacto"
-                                class="nav-link hover:text-primary transition-all duration-300 relative group px-4 py-2 block whitespace-normal"
-                            >
-                            Contacto
-                        </button>
-                        </li>
-                        <li class="relative">     
-                            <a
-                                href="/sergio-wilde"
-                                class="nav-link hover:text-primary transition-all duration-300 relative group px-4 py-2 block whitespace-normal"
-                            >
-                                Sergio Wilde
-                            </a>
-                        </li>
-                    </ul>
                 </li>
             </ul>
         </nav>
 
         <!-- Botón hamburguesa para móvil -->
-        <button class="xl:hidden" id="menuButton" aria-label="Menu">
+        <button class="xl:hidden text-white" id="menuButton" aria-label="Menu">
             <svg
-                class="w-8 h-8"
+                class="w-6 h-6"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -127,7 +125,7 @@ const { isFixed = true, messageContact = null } = Astro.props;
                     arial-label="Cerrar menú"
                 >
                     <svg
-                        class="w-10 h-10 text-white"
+                        class="w-8 h-8 text-white"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -139,35 +137,57 @@ const { isFixed = true, messageContact = null } = Astro.props;
                             d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
                 </button>
-                <div class="mb-16">
+                <div class="mb-12">
                     <img
-                        src="/logos/logotipo-color.PNG"
-                        alt="SW Tucumán Aventuras Logo"
-                        class="h-24 mb-4"
+                        src="/logos/logo-color-fondo.png"
+                        alt="Talca Logo"
+                        class="h-16 mb-4"
                     />
                 </div>
                 <ul
-                    class="flex flex-col items-center space-y-8 text-2xl font-light"
+                    class="flex flex-col items-center space-y-6 text-xl font-light"
                 >
                     <li class="menu-item group">
                         <a
                             href="/"
-                            class="nav-link hover:text-primary transition-all duration-300 relative group"
+                            class="nav-link hover:text-blue transition-all duration-300 relative group"
                         >
-                            Home
+                            Inicio
                             <div
                                 class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"
                             >
                             </div>
                         </a>
                     </li>
-                   
-                 
+                    <li class="menu-item group">
+                        <a
+                            href="#productos"
+                            class="nav-link hover:text-blue transition-all duration-300 relative group"
+                        >
+                            Productos
+                            <div
+                                class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"
+                            >
+                            </div>
+                        </a>
+                    </li>
+                    <li class="menu-item group">
+                        <a
+                            href="#nosotros"
+                            class="nav-link hover:text-blue transition-all duration-300 relative group"
+                        >
+                            Nosotros
+                            <div
+                                class="underline-animation h-0.5 bg-primary absolute -bottom-2 left-0 right-0"
+                            >
+                            </div>
+                        </a>
+                    </li>
                     <li class="menu-item">
                         <button
                             id="mobileContactButton"
                             aria-label="Abrir formulario de contacto"
-                            class="nav-link hover:text-primary transition-all duration-300 relative group"
+                            class="nav-link hover:text-blue transition-all duration-300 relative group"
                         >
                             Contacto
                             <div
@@ -180,6 +200,9 @@ const { isFixed = true, messageContact = null } = Astro.props;
             </div>
         </div>
     </div>
+    
+    <!-- Borde inferior con efecto de espuma -->
+    <div class="foam-border"></div>
 </header>
 
 <div
@@ -189,7 +212,7 @@ const { isFixed = true, messageContact = null } = Astro.props;
     <button
         id="closeSidebar"
         aria-label="Cerrar formulario de contacto"
-        class="absolute top-8 right-8 text-gray-800 hover:text-primary"
+        class="absolute top-8 right-8 text-gray-800 hover:text-blue"
     >
         <svg
             class="w-8 h-8"
@@ -214,7 +237,186 @@ const { isFixed = true, messageContact = null } = Astro.props;
 >
 </div>
 
-<style>
+<style define:vars={{ primaryColor: config.theme_color }}>
+    /* Estilos base para el header */
+    .soda-header {
+        background: linear-gradient(to bottom, rgba(225, 37, 27, 0.85) 0%, rgba(225, 37, 27, 0.8) 100%);
+        color: white;
+        position: relative;
+        overflow: hidden;
+        backdrop-filter: blur(2px);
+    }
+    
+    /* Efecto de espuma en el borde inferior */
+    .foam-border {
+        height: 8px;
+        background: linear-gradient(90deg, 
+            rgba(255,255,255,0.9) 0%, 
+            rgba(255,255,255,0.6) 20%, 
+            rgba(255,255,255,0.9) 40%, 
+            rgba(255,255,255,0.5) 60%, 
+            rgba(255,255,255,0.8) 80%, 
+            rgba(255,255,255,0.7) 100%);
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+        filter: blur(1px);
+    }
+    
+    /* Contenedor de burbujas */
+    .bubbles-container {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+    }
+    
+    /* Burbujas individuales */
+    .bubble {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        animation: bubble-rise 8s infinite ease-in;
+        bottom: -20px;
+    }
+    
+    .bubble-1 {
+        width: 15px;
+        height: 15px;
+        left: 10%;
+        animation-duration: 6s;
+        animation-delay: 0.2s;
+    }
+    
+    .bubble-2 {
+        width: 10px;
+        height: 10px;
+        left: 20%;
+        animation-duration: 5s;
+        animation-delay: 1s;
+    }
+    
+    .bubble-3 {
+        width: 8px;
+        height: 8px;
+        left: 30%;
+        animation-duration: 7s;
+        animation-delay: 0.5s;
+    }
+    
+    .bubble-4 {
+        width: 12px;
+        height: 12px;
+        left: 40%;
+        animation-duration: 6.5s;
+        animation-delay: 0.8s;
+    }
+    
+    .bubble-5 {
+        width: 9px;
+        height: 9px;
+        left: 60%;
+        animation-duration: 5.5s;
+        animation-delay: 0.3s;
+    }
+    
+    .bubble-6 {
+        width: 14px;
+        height: 14px;
+        left: 70%;
+        animation-duration: 7.5s;
+        animation-delay: 1.2s;
+    }
+    
+    .bubble-7 {
+        width: 11px;
+        height: 11px;
+        left: 80%;
+        animation-duration: 6s;
+        animation-delay: 0.7s;
+    }
+    
+    .bubble-8 {
+        width: 13px;
+        height: 13px;
+        left: 90%;
+        animation-duration: 8s;
+        animation-delay: 0.4s;
+    }
+    
+    @keyframes bubble-rise {
+        0% {
+            transform: translateY(0) scale(1);
+            opacity: 0.2;
+        }
+        50% {
+            transform: translateY(-50px) scale(1.1);
+            opacity: 0.6;
+        }
+        100% {
+            transform: translateY(-100px) scale(0.8);
+            opacity: 0;
+        }
+    }
+    
+    /* Estilo para los enlaces de navegación */
+    .nav-link {
+        color: white;
+        font-weight: 600;
+        position: relative;
+        transition: all 0.3s ease;
+    }
+    
+    .nav-link:hover {
+        color: #0439AC;
+    }
+    
+    /* Animación de burbujas en hover */
+    .bubble-animation {
+        height: 3px;
+        width: 0;
+        background: white;
+        position: absolute;
+        bottom: -5px;
+        left: 50%;
+        transform: translateX(-50%);
+        transition: width 0.3s ease;
+        border-radius: 3px;
+    }
+    
+    .nav-link:hover .bubble-animation {
+        width: 70%;
+        animation: bubble-pop 0.5s ease;
+        background: #0439AC;
+    }
+    
+    @keyframes bubble-pop {
+        0% {
+            transform: translateX(-50%) scale(0.5);
+            opacity: 0.5;
+        }
+        50% {
+            transform: translateX(-50%) scale(1.2);
+            opacity: 0.8;
+        }
+        100% {
+            transform: translateX(-50%) scale(1);
+            opacity: 1;
+        }
+    }
+    
+    /* Resto de los estilos existentes */
+    .menu-enter {
+        animation: menuEnter 0.4s ease forwards;
+    }
+    
+    .menu-exit {
+        animation: menuExit 0.4s ease forwards;
+    }
+
     .underline-animation {
         width: 0;
         opacity: 0;
@@ -229,19 +431,11 @@ const { isFixed = true, messageContact = null } = Astro.props;
     }
 
     .nav-link:hover {
-        color: #f15a24;
+        color: #0439AC;
     }
 
     .underline-animation {
-        background-color: #f15a24;
-    }
-
-    .menu-enter {
-        animation: menuEnter 0.4s ease forwards;
-    }
-
-    .menu-exit {
-        animation: menuExit 0.4s ease forwards;
+        background-color: #0439AC;
     }
 
     .menu-item {
@@ -280,19 +474,6 @@ const { isFixed = true, messageContact = null } = Astro.props;
             opacity: 1;
             transform: translateY(0);
         }
-    }
-
-    .dropdown-menu {
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-        transform: translateY(-10px);
-    }
-
-    .nav-item:hover .dropdown-menu {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
     }
 
     /* Estilos para la barra de desplazamiento */
@@ -384,24 +565,7 @@ import { openSidebar } from "@/utils/helpers";
         });
     });
 
-    const navItems = document.querySelectorAll(
-        ".nav-item",
-    ) as NodeListOf<HTMLElement>;
-    navItems.forEach((item: HTMLElement) => {
-        const submenu = item.querySelector("ul");
-        if (submenu) {
-            item.addEventListener("click", (e: Event) => {
-                e.stopPropagation();
-                submenu.classList.toggle("hidden");
-            });
-            item.addEventListener("mouseenter", () => {
-                submenu.classList.remove("hidden");
-            });
-        }
-    });
-
     const contactButton = document.getElementById("contactButton");
-    const contactButtonPrev = document.getElementById("contactButtonPrev");
     const mobileContactButton = document.getElementById("mobileContactButton");
     const contactSidebar = document.getElementById("contactSidebar");
     const sidebarOverlay = document.getElementById("sidebarOverlay");
@@ -411,12 +575,8 @@ import { openSidebar } from "@/utils/helpers";
         sidebarOverlay?.classList.add("opacity-0", "pointer-events-none");
         document.body.style.overflow = "";
     };
-    contactSidebar
-sidebarOverlay
-mobileMenu
-mobileMenu
+
     contactButton?.addEventListener("click", openSidebar);
-    contactButtonPrev?.addEventListener("click", openSidebar);
     mobileContactButton?.addEventListener("click", openSidebar);
     document
         .getElementById("closeSidebarBtn")
